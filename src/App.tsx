@@ -1,6 +1,9 @@
 import { ConfigProvider } from 'antd'
 import React from 'react'
 import HomeCard from './components/card/homeCard/index'
+import Test from './test'
+
+const Profile: React.FC = () => <img src='https://i.imgur.com/MK3eW3As.jpg' alt='' />
 
 const App: React.FC = () => (
   <ConfigProvider
@@ -16,6 +19,9 @@ const App: React.FC = () => (
       // algorithm: theme.darkAlgorithm
     }}
   >
+    <Test></Test>
+    <Profile></Profile>
+    <Profile></Profile>
     <HomeCard></HomeCard>
   </ConfigProvider>
 )
