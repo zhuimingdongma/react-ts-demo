@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import HomeCard from './components/card/homeCard/index'
+import Logo from 'components/logo/index'
 
 const Profile: React.FC = () => <img src='https://i.imgur.com/MK3eW3As.jpg' alt='' />
 
@@ -37,7 +38,7 @@ const Profile: React.FC = () => <img src='https://i.imgur.com/MK3eW3As.jpg' alt=
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>Hello world!</div>
+    element: <Logo></Logo>
   }
 ])
 

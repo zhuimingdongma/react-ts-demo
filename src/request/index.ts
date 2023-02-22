@@ -4,23 +4,24 @@ import { message } from 'antd'
 import axios from 'axios'
 const cookie =
   '__csrf=7a86c6f5e0b513d36a189f2dc4935ad6; MUSIC_U=6c5a3400f94b182ecff48ee1024481b3a08e0cf496cbf707d42dd53d639de9ec993166e004087dd30dd438f50efa92ad85065614c714c7984212e99934878fa7a58661eb15d42c62a0d2166338885bd7; NMTID=00OIVLLNV4juaGHUUSPoN_0fIt6HTIAAAGGTpWn0g'
-const baseURL = 'http://localhost:4000'
 
 class Http {
   instance: AxiosInstance
 
   constructor(requestConfig: RequestConfig) {
-    const timestamp = Date.now()
-    let cache = { params: { timestamp } }
-    let params = { ...requestConfig?.params, ...cache }
-    let headers = { contentType: requestConfig.method === 'GET' ? 'application/x-www-form-urlencoded' : 'application/json', cookie }
+    const baseURL = requestConfig.requestType === 'web' ? '/web' : '/x'
+    // const timestamp = Date.now()
+    // let cache = { timestamp }
+    // let params = { ...requestConfig?.params, ...cache }
+    // if (!requestConfig.method) requestConfig.method = 'GET'
+    // contentType: requestConfig.method === 'GET' ? 'application/x-www-form-urlencoded' : 'application/json',
+    let headers = { cookie }
     this.instance = axios.create({
       ...requestConfig,
       headers,
       baseURL,
       timeout: 3000,
-      withCredentials: true,
-      params
+      withCredentials: true
     })
 
     this.instance.interceptors.request.use(
@@ -85,11 +86,11 @@ class Http {
     )
   }
 
-  public GET<T>(url: string, config: RequestConfig): Promise<T> {
+  public GET<T>(url: string, config?: RequestConfig): Promise<T> {
     return this.instance.get(url, config)
   }
 
-  public POST<T>(url: string, data: T, config: RequestConfig): Promise<T> {
+  public POST<T>(url: string, data: T, config?: RequestConfig): Promise<T> {
     return this.instance.post(url, data, config)
   }
 }

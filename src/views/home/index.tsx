@@ -1,31 +1,22 @@
-import HomeCard from 'components/card/homeCard'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { getUserMusicList } from './request'
+import Header from 'components/header'
+import TabList, { tabData, tabProps } from 'components/tabList'
+import Content from 'components/content'
+
+const arr: tabData[] = [
+  { id: 1, name: '首页', children: <Content></Content> },
+  { id: 2, name: '动画', children: <Content></Content> },
+  { id: 3, name: '国创', children: <Content></Content> },
+  { id: 4, name: '音乐', children: <Content></Content> },
+  { id: 5, name: '舞蹈', children: <Content></Content> }
+]
 
 export default function Page() {
-  const [person, setPerson] = useState('Alice');
-  const [bio, setBio] = useState(null);
-  useEffect(() => {
-    let ignore = false;
-    setBio(null);
-    getUserMusicList(363901622).then(result => {
-      console.log('result: ', result);
-    });
-    return () => {
-      ignore = true;
-    }
-  }, [person]);
-
   return (
     <>
-      <select value={person} onChange={e => {
-        setPerson(e.target.value);
-      }}>
-        <option value="Alice">Alice</option>
-        <option value="Bob">Bob</option>
-        <option value="Taylor">Taylor</option>
-      </select>
-      <hr />
+      <Header></Header>
+      <TabList data={arr}></TabList>
     </>
-  );
+  )
 }

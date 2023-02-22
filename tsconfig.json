@@ -29,7 +29,7 @@
     },
     "types": ["node"]
   },
-  "include": ["src/**/*", "src/**/*.d.ts", "./src/**/*.ts", "./src/**/*.tsx"],
+  "include": ["src/**/*", "src/**/*.d.ts", "./src/**/*.ts", "./src/**/*.tsx", "src/**/*.less"],
   "exclude": ["./node_modules/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

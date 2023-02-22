@@ -8,6 +8,12 @@ export enum RequestMethod {
   DELETE = 'DELETE'
 }
 
+export interface RequestType {
+  web?: string
+  x?: string
+}
+
 export interface RequestConfig extends AxiosRequestConfig {
   method?: RequestMethod
+  requestType: RequestType
 }
