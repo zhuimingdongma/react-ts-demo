@@ -1,0 +1,33 @@
+.sidebar {
+  height: 100vh;
+  width: 60vw;
+  border: 1px solid #ebebeb;
+}
+.sidebar-box {
+  padding: 10px;
+  border-right: 1px solid #d5d4d4;
+  border-bottom: 1px solid #d5d4d4;
+}
+.sidebar-title {
+  border-right: 1px solid #d5d4d4;
+  border-top: 1px solid #d5d4d4;
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  z-index: 10;
+}
+.sidebar-btn {
+  color: blue;
+  padding: 10px 5px;
+  border-radius: 5px;
+  border: 1px solid #e3dfdf;
+  font-size: 12px;
+  line-height: 12px;
+}
+.sidebar-jump {
+  font-size: 20px;
+  margin: 10px;
+}
+h1 {
+  font-size: 20px;
+}

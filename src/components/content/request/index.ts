@@ -12,10 +12,17 @@ import Http from 'request/index'
  * @returns
  */
 export const sendCode = async (cid: number, tel: number, source: string, token: string, challenge: string, validate: string, seccode: string) => {
-  return await Http.POST('sms/send', {cid, tel, source, token, challenge, validate, seccode}, {headers:{"Content-Type": "application/x-www-form-urlencoded"}, requestType: })
+  return await Http.POST(
+    'sms/send',
+    { cid, tel, source, token, challenge, validate, seccode },
+    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, requestType: { web: 'web' } }
+  )
 }
 
-
+/**
+ *
+ * @returns
+ */
 export const getCountryList = async () => {
-  return await Http.GET('generic/country/list', {requestType: 'web'})
+  return await Http.GET('generic/country/list', { requestType: { web: 'web' } })
 }

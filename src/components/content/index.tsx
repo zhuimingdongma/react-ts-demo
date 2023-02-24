@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { getRankList } from './request'
+// import { getCountryList } from './request'
 
 const Content: React.FC = function () {
   useEffect(() => {
     const get = async () => {
-      await getRankList()
+      // await getCountryList()
     }
     get()
   }, [])

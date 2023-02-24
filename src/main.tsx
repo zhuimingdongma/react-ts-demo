@@ -3,12 +3,25 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import Header from 'components/header/index'
 import Home from './views/home/index'
+import Game from './views/game/index'
+import Root from 'components/root/index'
+import Contact from 'components/root/contact'
 import './index.less'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home></Home>
+    element: <Root></Root>,
+    children: [
+      {
+        path: 'contact/:contactId',
+        element: <Contact></Contact>
+      }
+    ]
+  },
+  {
+    path: 'game',
+    element: <Game></Game>
   }
 ])
 
