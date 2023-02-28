@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './index.less'
 
 interface BoardProps {
@@ -126,3 +126,25 @@ function calculateWinner(square: any[]): string | null {
 }
 
 export default Game
+
+export function Loading() {
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const load = (aPromise: Promise<any>) => {
+    setLoading(true)
+    aPromise.finally(() => setLoading(false))
+  }
+
+  return [loading, load] as const
+}
+
+// function tuplify<T extends any[]>(...elements: T) {
+//   return elements
+// }
+
+function useArray() {
+  const numberVal = useRef<number>(0).current
+  const fcVal = useRef(() => {}).current
+  return [numberVal, fcVal] as const
+  // return tuplify(numberVal, fcVal)
+}
