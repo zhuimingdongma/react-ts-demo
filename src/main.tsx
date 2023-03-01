@@ -6,6 +6,8 @@ import Home from './views/home/index'
 import Game from './views/game/index'
 import Root from 'components/root/index'
 import Contact from 'components/root/contact'
+import CounterExample from 'utils/algorithm/test'
+import Login from './views/login'
 import './index.less'
 
 const router = createBrowserRouter([
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
   {
     path: 'game',
     element: <Game></Game>
+  },
+  {
+    path: 'test',
+    element: <CounterExample></CounterExample>
+  },
+  {
+    path: 'login',
+    element: <Login></Login>
   }
 ])
 

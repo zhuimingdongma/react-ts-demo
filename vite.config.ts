@@ -19,11 +19,16 @@ export default defineConfig({
     // port: 3011
     proxy: {
       '/api': {
-        target: 'https://api.live.bilibili.com/room/',
+        target: 'https://passport.bilibili.com/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
       },
       '/web': {
+        target: 'https://passport.bilibili.com/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
+      },
+      '/x': {
         target: 'https://passport.bilibili.com/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
