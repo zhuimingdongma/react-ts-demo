@@ -15,5 +15,5 @@ export interface RequestType {
 
 export interface RequestConfig extends AxiosRequestConfig {
   method?: RequestMethod
-  requestType: RequestType
+  requestType?: RequestType
 }
