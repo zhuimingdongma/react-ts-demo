@@ -9,7 +9,7 @@ class Http {
   instance: AxiosInstance
 
   constructor(requestConfig: RequestConfig) {
-    const baseURL = requestConfig.requestType.web ? '/web' : '/x'
+    const baseURL = requestConfig?.requestType?.web ? '/web' : '/x'
     // const timestamp = Date.now()
     // let cache = { timestamp }
     // let params = { ...requestConfig?.params, ...cache }

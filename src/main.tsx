@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: 'game',
     element: <Game></Game>
+  },
+  {
+    path: 'home',
+    element: <Home></Home>
   }
 ])
 
@@ -31,14 +35,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </React.StrictMode>
 )
 
-const setRem = () => {
-  const design = 750
-  const ratio = (window.screen.width / design) * 100
-  const HTML = document.getElementsByTagName('html')[0]
-  HTML.style.fontSize = ratio + 'px'
+// const setRem = () => {
+//   const design = 750
+//   const ratio = (window.screen.width / design) * 100
+//   const HTML = document.getElementsByTagName('html')[0]
+//   HTML.style.fontSize = ratio + 'px'
 
-  window.addEventListener('resize', setRem)
-  window.addEventListener('DOMContentLoaded', setRem)
-}
+//   window.addEventListener('resize', setRem)
+//   window.addEventListener('DOMContentLoaded', setRem)
+// }
 
-setRem()
+// setRem()

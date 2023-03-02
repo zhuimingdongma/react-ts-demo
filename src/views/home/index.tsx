@@ -1,22 +1,27 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Header from 'components/header'
-import TabList, { tabData, tabProps } from 'components/tabList'
-import Content from 'components/content'
-
-const arr: tabData[] = [
-  { id: 1, name: '首页', children: <Content></Content> },
-  { id: 2, name: '动画', children: <Content></Content> },
-  { id: 3, name: '国创', children: <Content></Content> },
-  { id: 4, name: '音乐', children: <Content></Content> },
-  { id: 5, name: '舞蹈', children: <Content></Content> }
-]
+import { getCurrentHotList } from './request'
+import VideoCard from 'components/card/videoCard'
+import { CardProps } from 'components/card/videoCard/types/type'
 
 export default function Page() {
+  const [currentHotList, setHotList] = useState<CardProps[]>()
+
+  useEffect(() => {
+    const init = async () => {
+      let list = await getCurrentHotList()
+      setHotList(list)
+    }
+    init()
+  }, [])
+
   return (
     <>
       <Header></Header>
-      <TabList data={arr}></TabList>
+      {currentHotList?.map((card, i) => (
+        <VideoCard duration={card.duration} pic={card.pic} stat={card.stat}></VideoCard>
+      ))}
     </>
   )
 }
