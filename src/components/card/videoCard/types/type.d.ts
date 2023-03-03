@@ -1,7 +1,7 @@
 export interface CardProps {
   pic: string
   title?: string
-  duration: number
+  duration: number | string
   stat: StateProps
 }
 

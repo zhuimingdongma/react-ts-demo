@@ -1,17 +1,18 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Header from 'components/header'
-import { getCurrentHotList } from './request'
 import VideoCard from 'components/card/videoCard'
-import { CardProps } from 'components/card/videoCard/types/type'
+import { getRank, setRankList } from '@/store/rank'
+import { useSelector } from 'react-redux'
+import store from '@/store'
 
 export default function Page() {
-  const [currentHotList, setHotList] = useState<CardProps[]>()
-
+  const list = useSelector(getRank)
+  const {
+    data: { data }
+  } = list
   useEffect(() => {
     const init = async () => {
-      let list = await getCurrentHotList()
-      setHotList(list)
+      store.dispatch(setRankList(1))
     }
     init()
   }, [])
@@ -19,9 +20,17 @@ export default function Page() {
   return (
     <>
       <Header></Header>
-      {currentHotList?.map((card, i) => (
-        <VideoCard duration={card.duration} pic={card.pic} stat={card.stat}></VideoCard>
-      ))}
+      {data.length &&
+        data.map((card, i) => (
+          <VideoCard
+            duration={card.duration}
+            pic={card.pic}
+            video_review={card.video_review}
+            play={card.play}
+            review={card.review}
+            key={i}
+          ></VideoCard>
+        ))}
     </>
   )
 }

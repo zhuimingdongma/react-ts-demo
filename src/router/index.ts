@@ -1,14 +1,12 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import Home from './views/home/index'
-import Game from './views/game/index'
+import Home from '../views/home/index'
+import Game from '../views/game/index'
 import Root from 'components/root/index'
 import Contact from 'components/root/contact'
+
 import './index.less'
-import { setRankList } from './store/rank'
-import store from 'store/index'
 
 const router = createBrowserRouter([
   {
@@ -32,11 +30,9 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </Provider>
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 )
 
 // const setRem = () => {

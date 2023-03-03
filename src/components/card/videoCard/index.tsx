@@ -1,18 +1,18 @@
-import { CardProps } from './types/type'
+import { VideoItem } from '#/store'
 
-export default function VideoCard({ stat, duration, pic }: CardProps): JSX.Element {
+export default function VideoCard({ video_review, play, review, duration, pic }: VideoItem): JSX.Element {
   return (
     <>
       <div className='card'>
         <div className='flex between'>
-          <div className='flex' style={{ backgroundImage: `${pic}` }}>
+          <div className='flex' style={{ backgroundImage: `url(${pic})`, backgroundSize: '100% 100%', width: '200px', height: '200px' }}>
             <div className='flex center'>
               <img src='./assets/play.png' alt='' />
-              {stat.view}
+              {play}
             </div>
             <div className='flex center'>
               <img src='./assets/comment.png' alt='' />
-              {stat.reply}
+              {video_review}
             </div>
           </div>
           <div>{duration}</div>

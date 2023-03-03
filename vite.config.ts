@@ -12,24 +12,25 @@ export default defineConfig({
       components: resolve(__dirname, './src/components'),
       utils: resolve(__dirname, './src/utils'),
       request: resolve(__dirname, './src/request'),
-      views: resolve(__dirname, './src/views')
+      views: resolve(__dirname, './src/views'),
+      store: resolve(__dirname, './src/store')
     }
   },
   server: {
-    // port: 3011
+    port: 5173,
     proxy: {
-      '/api': {
-        target: 'https://passport.bilibili.com/',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
-      },
       '/web': {
         target: 'https://passport.bilibili.com/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
       },
       '/x': {
-        target: 'https://passport.bilibili.com/',
+        target: 'https://api.bilibili.com/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
+      },
+      '/api': {
+        target: 'http://localhost:3011/',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '') // 不可以省略rewrite
       }

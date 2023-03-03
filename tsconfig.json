@@ -25,7 +25,8 @@
       "utils/*": ["src/utils/*"],
       "request/*": ["src/request/*"],
       "@/*": ["src/*"],
-      "views/*": ["src/views/*"]
+      "views/*": ["src/views/*"],
+      "store/*": ["src/store/*"]
     },
     "types": ["node"]
   },

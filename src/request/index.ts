@@ -2,17 +2,11 @@ import { AxiosInstance } from 'axios'
 import { RequestConfig } from './request'
 import { message } from 'antd'
 import axios from 'axios'
-
 class Http {
   instance: AxiosInstance
 
   constructor(requestConfig: RequestConfig) {
-    const baseURL = requestConfig?.requestType?.web ? '/web' : '/x'
-    // const timestamp = Date.now()
-    // let cache = { timestamp }
-    // let params = { ...requestConfig?.params, ...cache }
-    // if (!requestConfig.method) requestConfig.method = 'GET'
-    // contentType: requestConfig.method === 'GET' ? 'application/x-www-form-urlencoded' : 'application/json',
+    const baseURL = '/api'
     this.instance = axios.create({
       ...requestConfig,
       baseURL,
@@ -82,12 +76,20 @@ class Http {
     )
   }
 
-  public GET<T>(url: string, config?: RequestConfig): Promise<T> {
+  public GET<T>(url: string, config?: RequestConfig): Promise<ResponseType<T>> {
     return this.instance.get(url, config)
   }
 
-  public POST<T>(url: string, data: T, config?: RequestConfig): Promise<T> {
+  public POST<T>(url: string, data: T, config?: RequestConfig): Promise<ResponseType<T>> {
     return this.instance.post(url, data, config)
+  }
+}
+
+export interface ResponseType<T> {
+  data: {
+    code?: string
+    data: T
+    msg?: string
   }
 }
 
