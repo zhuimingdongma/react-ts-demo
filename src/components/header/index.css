@@ -2,13 +2,21 @@
   position: fixed;
   top: 0;
   width: 95vw;
-  padding: 10px;
+  padding: 15px;
 }
 .header-logo {
-  width: 50px;
+  height: 100px;
+  width: 100px;
   display: inline-block;
 }
 .header-ava {
   width: 20px;
   margin-left: 25px;
+}
+.header-tabs {
+  height: 60vh;
+}
+.header-tabs .ant-tabs-nav-list {
+  top: -13px;
+  left: 9px;
 }

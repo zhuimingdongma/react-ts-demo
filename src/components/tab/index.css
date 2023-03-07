@@ -1,0 +1,15 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  align-items: flex-start;
+}
+.tabs-header {
+  margin-bottom: 10px;
+}
+.tabs-header__label {
+  margin-right: 10px;
+  color: #292222;
+  font-weight: 500;
+  white-space: nowrap;
+}

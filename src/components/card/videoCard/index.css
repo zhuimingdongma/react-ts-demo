@@ -1,0 +1,31 @@
+.card {
+  width: 250px;
+  height: 250px;
+  margin: 5px;
+}
+.card-box {
+  border: 1px solid #d3d0d0;
+  border-radius: 15px;
+  position: relative;
+  color: white;
+}
+.card-box__play {
+  margin-right: 10px;
+}
+.card-box__flex {
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+  z-index: 10;
+}
+.card-box__img {
+  width: 22px;
+  height: 22px;
+  margin-right: 5px;
+}
+.card-box__duration {
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+  z-index: 9;
+}

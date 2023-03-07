@@ -12,3 +12,19 @@ export interface VideoItem {
   duration?: string
   redirect_url?: string
 }
+
+export interface StatProps {
+  // 弹幕
+  danmaku: number
+  view: number
+  coin: number
+  share: number
+  like: number
+  dislike: number
+  aid: aid
+}
+
+export interface ArchiveProps extends Pick<VideoItem, 'aid' | 'pic' | 'duration' | 'play' | 'favorites' | 'title'> {
+  tname: string
+  stat: StatProps
+}

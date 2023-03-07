@@ -1,21 +1,30 @@
 import { VideoItem } from '#/store'
+import './index.less'
 
 export default function VideoCard({ video_review, play, review, duration, pic }: VideoItem): JSX.Element {
   return (
     <>
       <div className='card'>
-        <div className='flex between'>
-          <div className='flex' style={{ backgroundImage: `url(${pic})`, backgroundSize: '100% 100%', width: '200px', height: '200px' }}>
-            <div className='flex center'>
-              <img src='./assets/play.png' alt='' />
+        <div
+          className='flex card-box'
+          style={{
+            backgroundImage: `url(http://localhost:3011/transfer/image?pic=${pic})`,
+            backgroundSize: '100% 100%',
+            width: '200px',
+            height: '200px'
+          }}
+        >
+          <div className='flex card-box__flex'>
+            <div className='flex center card-box__play'>
+              <img src='/src/assets/play.png' alt='' className='card-box__img' />
               {play}
             </div>
-            <div className='flex center'>
-              <img src='./assets/comment.png' alt='' />
+            <div className='flex center card-box__review'>
+              <img src='/src/assets/comment.png' alt='' className='card-box__img' />
               {video_review}
             </div>
           </div>
-          <div>{duration}</div>
+          <div className='card-box__duration'>{duration}</div>
         </div>
       </div>
     </>
