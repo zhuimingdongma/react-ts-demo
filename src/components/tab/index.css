@@ -6,6 +6,7 @@
 }
 .tabs-header {
   margin-bottom: 10px;
+  flex-direction: column;
 }
 .tabs-header__label {
   margin-right: 10px;

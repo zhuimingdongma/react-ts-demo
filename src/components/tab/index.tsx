@@ -23,7 +23,7 @@ export default function Tabs(props: TabProps): JSX.Element {
             return (
               <>
                 <div
-                  className='tabs-header__label'
+                  className='tabs-header__label flex'
                   onClick={() => {
                     props.onChange(item.key)
                     changeTab(item.key)
@@ -35,7 +35,7 @@ export default function Tabs(props: TabProps): JSX.Element {
                 <div>
                   {item.subLabel?.map((sub, i) => {
                     return (
-                      <div className='tabs-header__sub' key={i}>
+                      <div className='tabs-header__sub flex' key={i}>
                         {sub}
                       </div>
                     )

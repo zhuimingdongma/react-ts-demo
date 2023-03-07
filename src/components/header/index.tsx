@@ -68,7 +68,8 @@ function Header(): JSX.Element {
     return {
       label: tab.label!,
       key: tab.key!,
-      children: tab.children
+      children: tab.children,
+      subLabel: tab.subLabel
     }
   })
 
