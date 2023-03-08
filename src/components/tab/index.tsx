@@ -11,7 +11,7 @@ interface TabProps {
 
 export default function Tabs(props: TabProps): JSX.Element {
   const [currentKey, setCurrentKey] = useState(props.defaultActiveKey)
-  const [currentSubKey, setSubKey] = useState<string>()
+  const [currentSubKey, setSubKey] = useState<string>('推荐')
   let subLabel: string[] = ['']
 
   const changeTab = (key: string) => {
@@ -20,7 +20,7 @@ export default function Tabs(props: TabProps): JSX.Element {
   }
 
   const changeSub = (sub: string) => {
-    setSubKey(currentSubKey => (currentSubKey = sub))
+    setSubKey(currentKey => (currentKey = sub))
   }
 
   subLabel = subLabelList[currentKey]
@@ -50,7 +50,12 @@ export default function Tabs(props: TabProps): JSX.Element {
           {subLabel &&
             subLabel.map((sub, i) => {
               return (
-                <div className={`flex mr-10 ${currentSubKey === sub ? 'tabs-sub__active' : ''}`} key={i} style={{ color: '#757575' }}>
+                <div
+                  className={`flex mr-10 ${currentSubKey == sub ? 'tabs-sub__active' : ''}`}
+                  key={i}
+                  style={{ color: '#757575' }}
+                  onClick={() => changeSub(sub)}
+                >
                   {sub}
                 </div>
               )

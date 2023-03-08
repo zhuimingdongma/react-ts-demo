@@ -81,9 +81,9 @@ function Header(): JSX.Element {
     <>
       <div className='header flex between'>
         <div className='flex'>
-          {/* <a className='header-logo'>
+          <a className='header-logo'>
             <Logo></Logo>
-          </a> */}
+          </a>
           {/* <div className='header-tabs'> */}
           {/* onChange={activeKey => router(`/channel/${activeKey}`)} */}
           <Tabs items={items} defaultActiveKey={key.channelId!} onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs>
