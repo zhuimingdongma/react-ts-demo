@@ -13,6 +13,7 @@ import Loading from 'components/loading'
 
 // @/App.tsx
 const Chanel = lazy(() => import('@/views/home/index'))
+const Test = lazy(() => import('components/test/index'))
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: 'game',
     element: <Game></Game>
+  },
+  {
+    path: '/test',
+    element: <Test></Test>
   },
   {
     path: 'channel/:channelId',

@@ -1,6 +1,7 @@
 import { Tab } from 'components/header'
 import { useState } from 'react'
 import './index.less'
+import { subLabelList } from './data'
 
 interface TabProps {
   items: Tab[]
@@ -9,11 +10,20 @@ interface TabProps {
 }
 
 export default function Tabs(props: TabProps): JSX.Element {
-  const [currentKey, setCurrentKey] = useState<string>(props.defaultActiveKey)
+  const [currentKey, setCurrentKey] = useState(props.defaultActiveKey)
+  const [currentSubKey, setSubKey] = useState<string>()
+  let subLabel: string[] = ['']
 
   const changeTab = (key: string) => {
-    setCurrentKey(key)
+    setCurrentKey(current => (current = key))
+    subLabel = subLabelList[currentKey]
   }
+
+  const changeSub = (sub: string) => {
+    setSubKey(currentSubKey => (currentSubKey = sub))
+  }
+
+  subLabel = subLabelList[currentKey]
 
   return (
     <>
@@ -32,22 +42,23 @@ export default function Tabs(props: TabProps): JSX.Element {
                 >
                   {item.label}
                 </div>
-                <div>
-                  {item.subLabel?.map((sub, i) => {
-                    return (
-                      <div className='tabs-header__sub flex' key={i}>
-                        {sub}
-                      </div>
-                    )
-                  })}
-                </div>
               </>
             )
           })}
         </div>
+        <div className='flex'>
+          {subLabel &&
+            subLabel.map((sub, i) => {
+              return (
+                <div className={`flex mr-10 ${currentSubKey === sub ? 'tabs-sub__active' : ''}`} key={i} style={{ color: '#757575' }}>
+                  {sub}
+                </div>
+              )
+            })}
+        </div>
         <div className='tabs-content'>
-          {props.items.map(tab => {
-            return <>{tab.key === currentKey ? <div key={tab.key}>{tab.children}</div> : <div key={tab.key}></div>}</>
+          {props.items.map((tab, i) => {
+            return <>{tab.key === currentKey ? <div key={i}>{tab.children}</div> : <div key={tab.key}></div>}</>
           })}
         </div>
       </div>

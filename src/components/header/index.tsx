@@ -11,6 +11,7 @@ import { TabProps } from './types'
 import HomeContent from 'components/content/home'
 import { useNavigate } from 'react-router-dom'
 import Tabs from 'components/tab'
+import { useParams } from 'react-router-dom'
 
 export interface Tab extends Optional<Omit<TabPaneProps, 'tab'>> {
   key: string
@@ -74,17 +75,18 @@ function Header(): JSX.Element {
   })
 
   const router = useNavigate()
+  const key = useParams()
 
   return (
     <>
       <div className='header flex between'>
         <div className='flex'>
-          <a className='header-logo'>
+          {/* <a className='header-logo'>
             <Logo></Logo>
-          </a>
+          </a> */}
           {/* <div className='header-tabs'> */}
           {/* onChange={activeKey => router(`/channel/${activeKey}`)} */}
-          <Tabs items={items} defaultActiveKey='1' onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs>
+          <Tabs items={items} defaultActiveKey={key.channelId!} onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs>
           {/* <Tabs items={items} defaultActiveKey='1' onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs> */}
           {/* </div> */}
           {/* <div>
