@@ -7,9 +7,11 @@ import Game from './views/game/index'
 import Root from 'components/root/index'
 import Contact from 'components/root/contact'
 import './index.less'
-import { setAnimateMADList, setRankList } from './store/rank'
+import { setArchiveList, setRankClassifyList, setRankList } from './store/rank'
 import store from 'store/index'
 import Loading from 'components/loading'
+import { subLabelList } from 'components/tab/data'
+import Rank from './views/rank'
 
 // @/App.tsx
 const Chanel = lazy(() => import('@/views/home/index'))
@@ -37,21 +39,21 @@ const router = createBrowserRouter([
     path: 'channel/:channelId',
     element: <Chanel></Chanel>,
     loader: async ({ params }) => {
-      // if (
-      //   params.channelId === '1' ||
-      //   params.channelId === '167' ||
-      //   params.channelId === '3' ||
-      //   params.channelId === '129' ||
-      //   params.channelId === '4' ||
-      //   params.channelId === '36' ||
-      //   params.channelId === '188' ||
-      //   params.channelId === '160' ||
-      //   params.channelId === '119'
-      // ) {
-      //   store.dispatch(setRankList(Number()))
-      // }
-      // store.dispatch(setAnimateMADList({ tId: 24, p: 1 }))
+      let subKey = 0
+      Object.keys(subLabelList).map(key => {
+        if (params.channelId === key) {
+          subKey = subLabelList[key][1].key
+        }
+      })
+      store.dispatch(setArchiveList({ tId: subKey, p: 1 }))
       return store.dispatch(setRankList(Number(params.channelId)))
+    }
+  },
+  {
+    path: 'ranking/:rankId',
+    element: <Rank></Rank>,
+    loader: async ({ params }) => {
+      return store.dispatch(setRankClassifyList(Number(params.rankId)))
     }
   }
 ])

@@ -1,17 +1,19 @@
 import Avatar from './avatar'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import Logo from '../logo/index'
 import './index.less'
 import { Popover, TabPaneProps } from 'antd'
 import { Optional } from '#/index'
-import { getRank, setRankList } from '@/store/rank'
+import { getArchive, getRank } from '@/store/rank'
 import { useSelector } from 'react-redux'
 import { TabProps } from './types'
-import HomeContent from 'components/content/home'
+import Content from 'components/content/home'
 import { useNavigate } from 'react-router-dom'
 import Tabs from 'components/tab'
 import { useParams } from 'react-router-dom'
+import { ArchiveProps } from '#/store'
+import { ResponseType } from 'request/index'
 
 export interface Tab extends Optional<Omit<TabPaneProps, 'tab'>> {
   key: string
@@ -20,28 +22,41 @@ export interface Tab extends Optional<Omit<TabPaneProps, 'tab'>> {
 }
 
 function Header(): JSX.Element {
-  useEffect(() => {
-    const init = async () => {
-      // store.dispatch(setRankList(1))
-    }
-    init()
-  }, [])
+  const [subList, setSubList] = useState<ResponseType<ArchiveProps>>()
+  const list = useSelector(getRank)
+  const archiveList = useSelector(getArchive)
 
-  const homeList = useSelector(getRank)
+  const changeSub = key => {
+    setSubList(archiveList)
+  }
 
   const tabList: TabProps[] = [
     {
       key: '1',
       label: '首页',
       target: '/home',
-      children: HomeContent(homeList)
+      children: Content(list, archiveList)
     },
     {
       key: '33',
       label: '番剧',
       target: '/Fan',
-      children: HomeContent(homeList),
+      children: Content(list, archiveList),
       subLabel: ['推荐', 'MAD·AMV', 'MMD·3D', '短片·手书·配音']
+    },
+    {
+      key: '167',
+      label: '国创',
+      target: '/Fan',
+      children: Content(list, archiveList),
+      subLabel: ['推荐', '国创动画', '国产原创相关', '布袋戏', '动态漫·广播剧', '资讯']
+    },
+    {
+      key: '3',
+      label: '音乐',
+      target: '/music',
+      children: Content(list, archiveList),
+      subLabel: ['推荐', '原创音乐', '翻唱', 'VOCALOID·UTAU', '电音', 'MV', '演奏', '音乐现场']
     }
     // {
     //   value: '直播',
@@ -84,18 +99,12 @@ function Header(): JSX.Element {
           <a className='header-logo'>
             <Logo></Logo>
           </a>
-          {/* <div className='header-tabs'> */}
-          {/* onChange={activeKey => router(`/channel/${activeKey}`)} */}
-          <Tabs items={items} defaultActiveKey={key.channelId!} onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs>
-          {/* <Tabs items={items} defaultActiveKey='1' onChange={activeKey => router(`/channel/${activeKey}`)}></Tabs> */}
-          {/* </div> */}
-          {/* <div>
-            {tabList.map((tab, i) => (
-              <Popover content={tab.content} key={i}>
-                <div>{tab.value}</div>
-              </Popover>
-            ))}
-          </div> */}
+          <Tabs
+            items={items}
+            defaultActiveKey={key.channelId!}
+            onChange={activeKey => router(`/channel/${activeKey}`)}
+            onChangeSub={subKey => changeSub(subKey)}
+          ></Tabs>
         </div>
         <div className='flex'>
           <a className='header-search'>

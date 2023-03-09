@@ -1,29 +1,33 @@
 import { Tab } from 'components/header'
 import { useState } from 'react'
 import './index.less'
-import { subLabelList } from './data'
+import { subLabelList, subVal } from './data'
+import store from '@/store'
+import { setArchiveList } from '@/store/rank'
 
 interface TabProps {
   items: Tab[]
   defaultActiveKey: string
   onChange: (key: string) => void
+  onChangeSub?: (key: number) => void
 }
 
 export default function Tabs(props: TabProps): JSX.Element {
   const [currentKey, setCurrentKey] = useState(props.defaultActiveKey)
-  const [currentSubKey, setSubKey] = useState<string>('推荐')
-  let subLabel: string[] = ['']
+  const [currentSubKey, setSubKey] = useState<number>(1)
+  let subLabel: subVal[] = []
 
   const changeTab = (key: string) => {
     setCurrentKey(current => (current = key))
     subLabel = subLabelList[currentKey]
   }
 
-  const changeSub = (sub: string) => {
+  const changeSub = (sub: number) => {
     setSubKey(currentKey => (currentKey = sub))
+    store.dispatch(setArchiveList({ tId: sub }))
   }
 
-  subLabel = subLabelList[currentKey]
+  if (props.onChangeSub) subLabel = subLabelList[currentKey]
 
   return (
     <>
@@ -33,12 +37,12 @@ export default function Tabs(props: TabProps): JSX.Element {
             return (
               <>
                 <div
-                  className='tabs-header__label flex'
+                  className={`tabs-header__label flex ${currentKey === item.key ? 'tabs-header__label--active' : ''}`}
                   onClick={() => {
                     props.onChange(item.key)
                     changeTab(item.key)
                   }}
-                  key={i}
+                  key={item.key}
                 >
                   {item.label}
                 </div>
@@ -48,15 +52,17 @@ export default function Tabs(props: TabProps): JSX.Element {
         </div>
         <div className='flex'>
           {subLabel &&
-            subLabel.map((sub, i) => {
+            subLabel.map(sub => {
               return (
                 <div
-                  className={`flex mr-10 ${currentSubKey == sub ? 'tabs-sub__active' : ''}`}
-                  key={i}
+                  className={`flex mr-10 ${currentSubKey == sub.key ? 'tabs-sub__active' : ''}`}
+                  key={sub.key}
                   style={{ color: '#757575' }}
-                  onClick={() => changeSub(sub)}
+                  onClick={() => {
+                    props.onChangeSub && props.onChangeSub(sub.key), changeSub(sub.key)
+                  }}
                 >
-                  {sub}
+                  {sub.val}
                 </div>
               )
             })}

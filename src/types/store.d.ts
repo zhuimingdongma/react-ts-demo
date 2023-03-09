@@ -3,7 +3,7 @@ export interface VideoItem {
   bvid?: string | number
   title?: string
   play: number
-  review: number
+  review?: number
   video_review: number
   favorites?: number
   author?: string
@@ -24,7 +24,17 @@ export interface StatProps {
   aid: aid
 }
 
-export interface ArchiveProps extends Pick<VideoItem, 'aid' | 'pic' | 'duration' | 'play' | 'favorites' | 'title'> {
+type ArchiveBase = Pick<VideoItem, 'aid' | 'pic' | 'duration' | 'play' | 'favorites' | 'title'>
+
+export interface Archive extends ArchiveBase {
   tname: string
   stat: StatProps
+}
+
+export interface ArchiveProps {
+  archives: Archive[]
+}
+
+export interface RankProps {
+  list: VideoItem[]
 }

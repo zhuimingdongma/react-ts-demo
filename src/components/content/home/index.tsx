@@ -5,12 +5,22 @@ import { useSelector } from 'react-redux'
 import store from '@/store'
 import './index.less'
 import { ResponseType } from 'request/index'
-import { VideoItem } from '#/store'
+import { ArchiveProps, VideoItem } from '#/store'
+import { RightOutlined } from '@ant-design/icons'
 
-export default function HomeContent(list: ResponseType<VideoItem[]>): React.ReactNode {
+export default function Content(list: ResponseType<VideoItem[]>, archiveList?: ResponseType<ArchiveProps>): React.ReactNode {
   const {
     data: { data }
   } = list
+
+  const {
+    data: {
+      data: { archives }
+    }
+  } = archiveList!
+
+  const archiveTitle = archives[0].tname
+
   return (
     <>
       <div className='flex home'>
@@ -25,6 +35,27 @@ export default function HomeContent(list: ResponseType<VideoItem[]>): React.Reac
               key={i}
             ></VideoCard>
           ))}
+      </div>
+      <div className='archive'>
+        <div className='archive-header flex between'>
+          {archiveTitle}
+          <div className='flex'>
+            查看更多
+            <RightOutlined />
+          </div>
+        </div>
+        <div className='archive flex'>
+          {archives.map(archive => (
+            <VideoCard
+              duration={archive.duration}
+              pic={archive.pic}
+              video_review={archive.stat.view}
+              play={archive.play}
+              review={archive.stat.view}
+              key={archive.aid}
+            ></VideoCard>
+          ))}
+        </div>
       </div>
     </>
   )

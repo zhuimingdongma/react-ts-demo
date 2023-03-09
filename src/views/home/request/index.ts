@@ -18,5 +18,5 @@ export const getRankList = async (rId: number = 1) => {
  * @returns 获取二级列表 排行榜
  */
 export const getArchiveList = async (tId: number = 24, p?: number) => {
-  return Http.GET<ArchiveProps[]>('ranking/archive', { params: { tId, p } })
+  return Http.GET<ArchiveProps>('ranking/archive', { params: { tId, p } })
 }
