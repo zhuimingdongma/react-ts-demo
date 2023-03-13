@@ -12,7 +12,7 @@ export default function RankContent(rankList: ResponseType<RankProps>): JSX.Elem
   return (
     <div className='rankContent'>
       {list.map((item, i) => (
-        <div className='mb-10 flex center'>
+        <div className='mb-10 flex center' style={{ width: '100vw' }} key={item.aid}>
           {i === 0 ? (
             <img className='rankContent-img__1 rankContent-img' src='/src/views/rank/assets/rank1.png'></img>
           ) : i === 1 ? (

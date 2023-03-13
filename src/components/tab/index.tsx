@@ -33,20 +33,18 @@ export default function Tabs(props: TabProps): JSX.Element {
     <>
       <div className='tabs'>
         <div className='tabs-header flex'>
-          {props.items.map((item, i) => {
+          {props.items.map(item => {
             return (
-              <>
-                <div
-                  className={`tabs-header__label flex ${currentKey === item.key ? 'tabs-header__label--active' : ''}`}
-                  onClick={() => {
-                    props.onChange(item.key)
-                    changeTab(item.key)
-                  }}
-                  key={item.key}
-                >
-                  {item.label}
-                </div>
-              </>
+              <div
+                className={`tabs-header__label flex ${currentKey === item.key ? 'tabs-header__label--active' : ''}`}
+                onClick={() => {
+                  props.onChange(item.key)
+                  changeTab(item.key)
+                }}
+                key={item.key}
+              >
+                {item.label}
+              </div>
             )
           })}
         </div>
@@ -68,8 +66,8 @@ export default function Tabs(props: TabProps): JSX.Element {
             })}
         </div>
         <div className='tabs-content'>
-          {props.items.map((tab, i) => {
-            return <>{tab.key === currentKey ? <div key={i}>{tab.children}</div> : <div key={tab.key}></div>}</>
+          {props.items.map(tab => {
+            return <div key={tab.key}>{tab.key === currentKey ? <div>{tab.children}</div> : <div></div>}</div>
           })}
         </div>
       </div>
