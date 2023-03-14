@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-// import Chanel from './views/home/index'
 import Game from './views/game/index'
 import Root from 'components/root/index'
 import Contact from 'components/root/contact'
@@ -11,19 +10,42 @@ import { setArchiveList, setRankClassifyList, setRankList } from './store/rank'
 import store from 'store/index'
 import Loading from 'components/loading'
 import { subLabelList } from 'components/tab/data'
-import Rank from './views/rank'
 
 // @/App.tsx
+const Header = lazy(() => import('@/components/header/index'))
 const Chanel = lazy(() => import('@/views/home/index'))
-const Test = lazy(() => import('components/test/index'))
+const Test = lazy(() => import('components/test/hooks'))
+const VideoPlayCard = lazy(() => import('components/card/videoCard/videoPlayCard'))
+const Rank = lazy(() => import('@/views/rank/index'))
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root></Root>,
+    element: <Header></Header>,
     children: [
       {
-        path: 'contact/:contactId',
-        element: <Contact></Contact>
+        path: 'channel/:channelId',
+        element: <Chanel></Chanel>,
+        loader: async ({ params }) => {
+          let subKey = 0
+          Object.keys(subLabelList).map(key => {
+            if (params.channelId === key) {
+              subKey = subLabelList[key][1].key
+            }
+          })
+          store.dispatch(setArchiveList({ tId: subKey, p: 1 }))
+          return store.dispatch(setRankList(Number(params.channelId)))
+        }
+      },
+      {
+        path: 'ranking/:rankId',
+        element: <Rank></Rank>,
+        loader: async ({ params }) => {
+          return store.dispatch(setRankClassifyList(Number(params.rankId)))
+        }
+      },
+      {
+        path: 'play',
+        element: <VideoPlayCard></VideoPlayCard>
       }
     ]
   },
@@ -32,29 +54,8 @@ const router = createBrowserRouter([
     element: <Game></Game>
   },
   {
-    path: '/test',
+    path: 'test',
     element: <Test></Test>
-  },
-  {
-    path: 'channel/:channelId',
-    element: <Chanel></Chanel>,
-    loader: async ({ params }) => {
-      let subKey = 0
-      Object.keys(subLabelList).map(key => {
-        if (params.channelId === key) {
-          subKey = subLabelList[key][1].key
-        }
-      })
-      store.dispatch(setArchiveList({ tId: subKey, p: 1 }))
-      return store.dispatch(setRankList(Number(params.channelId)))
-    }
-  },
-  {
-    path: 'ranking/:rankId',
-    element: <Rank></Rank>,
-    loader: async ({ params }) => {
-      return store.dispatch(setRankClassifyList(Number(params.rankId)))
-    }
   }
 ])
 

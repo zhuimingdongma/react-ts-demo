@@ -19,7 +19,7 @@ export default function Content(list: ResponseType<VideoItem[]>, archiveList?: R
     }
   } = archiveList!
 
-  const archiveTitle = archives[0].tname
+  const archiveTitle = archives[0]?.tname
 
   return (
     <>

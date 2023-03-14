@@ -26,7 +26,8 @@
       "request/*": ["src/request/*"],
       "@/*": ["src/*"],
       "views/*": ["src/views/*"],
-      "store/*": ["src/store/*"]
+      "store/*": ["src/store/*"],
+      "hooks/*": ["src/hooks/*"]
     },
     "types": ["node"]
   },

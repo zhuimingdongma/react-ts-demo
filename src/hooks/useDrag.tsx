@@ -13,7 +13,7 @@ export function useDrag<T>(data: T, target: BasicTargetType, option: DragOptions
   useEffect(() => {
     const el = getTargetElement(target)
 
-    if (!el) {
+    if (!el?.addEventListener) {
       return
     }
 

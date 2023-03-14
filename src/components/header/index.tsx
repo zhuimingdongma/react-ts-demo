@@ -1,5 +1,5 @@
 import Avatar from './avatar'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import Logo from '../logo/index'
 import './index.less'
@@ -14,6 +14,7 @@ import Tabs from 'components/tab'
 import { useParams } from 'react-router-dom'
 import { ArchiveProps } from '#/store'
 import { ResponseType } from 'request/index'
+import { Outlet } from 'react-router-dom'
 
 export interface Tab extends Optional<Omit<TabPaneProps, 'tab'>> {
   key: string
@@ -21,7 +22,11 @@ export interface Tab extends Optional<Omit<TabPaneProps, 'tab'>> {
   subLabel?: string[]
 }
 
-function Header(): JSX.Element {
+interface Params {
+  isChannel?: boolean
+}
+
+function Header({ isChannel }: Params): JSX.Element {
   const [subList, setSubList] = useState<ResponseType<ArchiveProps>>()
   const list = useSelector(getRank)
   const archiveList = useSelector(getArchive)
@@ -30,7 +35,7 @@ function Header(): JSX.Element {
     setSubList(archiveList)
   }
 
-  const tabList: TabProps[] = [
+  const tabList = useRef<TabProps[]>([
     {
       key: '1',
       label: '首页',
@@ -58,29 +63,8 @@ function Header(): JSX.Element {
       children: Content(list, archiveList),
       subLabel: ['推荐', '原创音乐', '翻唱', 'VOCALOID·UTAU', '电音', 'MV', '演奏', '音乐现场']
     }
-    // {
-    //   value: '直播',
-    //   target: '/'
-    // },
-    // {
-    //   value: '游戏中心',
-    //   target: '/'
-    // },
-    // {
-    //   value: '会员购',
-    //   target: '/'
-    // },
-    // {
-    //   value: '漫画',
-    //   target: '/'
-    // },
-    // {
-    //   value: '赛事',
-    //   target: '/'
-    // }
-  ]
-
-  const items: Tab[] = tabList.map(tab => {
+  ])
+  const items: Tab[] = tabList.current.map(tab => {
     return {
       label: tab.label!,
       key: tab.key!,
@@ -114,6 +98,9 @@ function Header(): JSX.Element {
             <Avatar></Avatar>
           </a>
         </div>
+      </div>
+      <div className='content'>
+        <Outlet></Outlet>
       </div>
     </>
   )

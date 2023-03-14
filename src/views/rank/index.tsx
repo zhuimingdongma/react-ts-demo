@@ -68,7 +68,7 @@ export default function Rank(): JSX.Element {
     <>
       <div className='rank'>
         <div className='rank-header flex between center '>
-          <LeftOutlined style={{ color: '#fb7299', fontSize: '34px', marginLeft: '20px' }} />
+          {/* <LeftOutlined style={{ color: '#fb7299', fontSize: '34px', marginLeft: '20px' }} /> */}
           <span style={{ color: '#fb7299' }} className='rank-header__span'>
             排行榜
           </span>

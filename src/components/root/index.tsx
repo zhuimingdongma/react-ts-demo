@@ -16,10 +16,12 @@ export default function Root() {
             <Search placeholder='input search text' style={{ width: 150 }} />
             <button className='sidebar-btn ml-1'>New</button>
           </div>
-          <div onClick={() => navigate('contacts/1')} className='sidebar-jump'>
+          {/* <Link to={`contact/1`}>Your Name</Link>
+          <Link to={`contact/2`}>Your Friend</Link> */}
+          <div onClick={() => navigate('contact/1')} className='sidebar-jump'>
             Your Name
           </div>
-          <div onClick={() => navigate('contacts/2')} className='sidebar-jump'>
+          <div onClick={() => navigate('contact/2')} className='sidebar-jump'>
             Your Friend
           </div>
         </div>
